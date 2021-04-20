@@ -4,9 +4,17 @@
   "version": "2021.4.1",
   "preview": true,
   "publisher": "ms-vscode",
+  "enableProposedApi": true,
   "description": "(Preview) Develop PowerShell scripts in Visual Studio Code!",
   "engines": {
     "vscode": "^1.52.0"
+  },
+  "workspaceTrust": {
+      "request": "onDemand",
+      "description": "this is what trust means for this extension",
+      "requiredForConfigurations": [
+        "powershell.scriptAnalysis.settingsPath"
+      ]
   },
   "license": "SEE LICENSE IN LICENSE.txt",
   "homepage": "https://github.com/PowerShell/vscode-powershell/blob/master/README.md",

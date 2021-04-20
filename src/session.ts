@@ -615,6 +615,12 @@ export class SessionManager implements Middleware {
                     this.languageServerClient.onNotification(
                         RunspaceChangedEventType,
                         (runspaceDetails) => { this.setStatusBarVersionString(runspaceDetails); });
+
+                    if (vscode.workspace.isTrusted) {
+                        this.languageServerClient.sendNotification(DidTrustWorkspaceEventType, {});
+                    } else {
+                        vscode.workspace.onDidReceiveWorkspaceTrust((e) => this.languageServerClient.sendNotification(DidTrustWorkspaceEventType, {}));
+                    }
                 },
                 (reason) => {
                     this.setSessionFailure("Could not start language service: ", reason);
@@ -789,6 +795,10 @@ export const PowerShellVersionRequestType =
 export const RunspaceChangedEventType =
     new NotificationType<IRunspaceDetails>(
         "powerShell/runspaceChanged");
+
+export const DidTrustWorkspaceEventType =
+    new NotificationType<any>(
+        "workspace/didTrustWorkspace");
 
 export enum RunspaceType {
     Local,
