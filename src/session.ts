@@ -616,11 +616,12 @@ export class SessionManager implements Middleware {
                         RunspaceChangedEventType,
                         (runspaceDetails) => { this.setStatusBarVersionString(runspaceDetails); });
 
-                    if (vscode.workspace.isTrusted) {
+                    // TODO: Remove any's when engine is updated to 1.56
+                    if ((vscode.workspace as any).isTrusted) {
                         this.languageServerClient.sendNotification(DidGrantWorkspaceTrust, {});
                     // make sure we are in a new enough version of VS Code
-                    } else if (vscode.workspace.onDidGrantWorkspaceTrust) {
-                        vscode.workspace.onDidGrantWorkspaceTrust((e) => this.languageServerClient.sendNotification(DidGrantWorkspaceTrust, {}));
+                    } else if ((vscode.workspace as any).onDidGrantWorkspaceTrust) {
+                        (vscode.workspace as any).onDidGrantWorkspaceTrust(() => this.languageServerClient.sendNotification(DidGrantWorkspaceTrust, {}));
                     }
                 },
                 (reason) => {

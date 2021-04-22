@@ -10,11 +10,11 @@
     "vscode": "^1.52.0"
   },
   "workspaceTrust": {
-      "supported": "limited",
-      "description": "If a PSScriptAnalyzer settings file is detected in the workspace, diagnostics will be turned off.",
-      "requiredForConfigurations": [
-        "powershell.scriptAnalysis.settingsPath"
-      ]
+    "supported": "limited",
+    "description": "If a PSScriptAnalyzer settings file is detected in the workspace, diagnostics will be turned off.",
+    "requiredForConfigurations": [
+      "powershell.scriptAnalysis.settingsPath"
+    ]
   },
   "license": "SEE LICENSE IN LICENSE.txt",
   "homepage": "https://github.com/PowerShell/vscode-powershell/blob/master/README.md",
