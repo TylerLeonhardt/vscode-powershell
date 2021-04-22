@@ -10,8 +10,8 @@
     "vscode": "^1.52.0"
   },
   "workspaceTrust": {
-      "request": "onDemand",
-      "description": "this is what trust means for this extension",
+      "supported": "limited",
+      "description": "If a PSScriptAnalyzer settings file is detected in the workspace, diagnostics will be turned off.",
       "requiredForConfigurations": [
         "powershell.scriptAnalysis.settingsPath"
       ]

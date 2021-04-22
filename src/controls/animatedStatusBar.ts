@@ -122,4 +122,6 @@ class AnimatedStatusBarItem implements StatusBarItem {
     private stop(): void {
         clearInterval(this.intervalId);
     }
+
+    backgroundColor: ThemeColor | undefined;
 }

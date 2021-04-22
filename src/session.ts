@@ -617,9 +617,10 @@ export class SessionManager implements Middleware {
                         (runspaceDetails) => { this.setStatusBarVersionString(runspaceDetails); });
 
                     if (vscode.workspace.isTrusted) {
-                        this.languageServerClient.sendNotification(DidTrustWorkspaceEventType, {});
-                    } else {
-                        vscode.workspace.onDidReceiveWorkspaceTrust((e) => this.languageServerClient.sendNotification(DidTrustWorkspaceEventType, {}));
+                        this.languageServerClient.sendNotification(DidGrantWorkspaceTrust, {});
+                    // make sure we are in a new enough version of VS Code
+                    } else if (vscode.workspace.onDidGrantWorkspaceTrust) {
+                        vscode.workspace.onDidGrantWorkspaceTrust((e) => this.languageServerClient.sendNotification(DidGrantWorkspaceTrust, {}));
                     }
                 },
                 (reason) => {
@@ -796,9 +797,9 @@ export const RunspaceChangedEventType =
     new NotificationType<IRunspaceDetails>(
         "powerShell/runspaceChanged");
 
-export const DidTrustWorkspaceEventType =
+export const DidGrantWorkspaceTrust =
     new NotificationType<any>(
-        "workspace/didTrustWorkspace");
+        "workspace/didGrantWorkspaceTrust");
 
 export enum RunspaceType {
     Local,
